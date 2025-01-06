@@ -25,7 +25,7 @@ private:
     object m_exception;
 };
 
-class error_already_set {
+class error_already_set : public std::exception {
 public:
     bool match(py_Type type) const { return py_matchexc(type); }
 };

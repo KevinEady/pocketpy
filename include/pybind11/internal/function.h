@@ -569,7 +569,7 @@ private:
         } catch(type_error& e) { py_exception(tp_TypeError, e.what()); } catch(import_error& e) {
             py_exception(tp_ImportError, e.what());
         } catch(error_already_set&) {
-            return false;
+            // exception already set, do nothing
         } catch(attribute_error& e) {
             py_exception(tp_AttributeError, e.what());
         } catch(std::exception& e) { py_exception(tp_RuntimeError, e.what()); }

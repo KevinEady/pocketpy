@@ -40,6 +40,12 @@ TEST_F(PYBIND11_TEST, exception_cpp_to_python) {
         throw py::stop_iteration();
     });
     py::exec("try:\n    test_stop_iteration()\nexcept StopIteration as e:\n    pass");
+
+    m.def("test_error_already_set", []() {
+        KeyError(none().ptr());
+        throw py::error_already_set();
+    });
+    py::exec("try:\n    test_error_already_set()\nexcept KeyError as e:\n    pass");
     TEST_EXCEPTION(index_error, IndexError);
     // FIXME: TEST_EXCEPTION(key_error, KeyError);
     TEST_EXCEPTION(value_error, ValueError);
